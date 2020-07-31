@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Events\UserDeleted;
+use App\Events\UserDeleting;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -36,4 +38,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $dispatchesEvents = [
+        'deleting' => UserDeleting::class,
+        'deleted' => UserDeleted::class
+    ];
+
 }
